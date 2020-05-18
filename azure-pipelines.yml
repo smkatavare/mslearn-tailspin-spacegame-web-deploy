@@ -64,3 +64,25 @@ stages:
 
     - publish: '$(Build.ArtifactStagingDirectory)'
       artifact: drop
+- stage: 'Deploy'
+  displayName: 'Deploy the web application'
+  dependsOn: 'Build'
+  jobs:
+  - deployment: 'Deploy'
+    pool: 
+      vmImage: 'ubuntu-16.04'
+    enviornment: dev
+    variables:
+    - group: Release
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - download: current
+            artifact: drop
+          - task: AzureWebApp@1
+            displayName: 'Azure Web App Deploy website'
+            inputs:
+              azureSubscription: 'satejmvcapp'
+              appName: '$(WebAppName)'
+              package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
