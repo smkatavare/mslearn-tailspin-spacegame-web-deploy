@@ -71,7 +71,7 @@ stages:
   - deployment: 'Deploy'
     pool: 
       vmImage: 'ubuntu-16.04'
-    enviornment: dev
+    environment: dev
     variables:
     - group: Release
     strategy:
