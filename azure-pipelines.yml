@@ -83,6 +83,6 @@ stages:
           - task: AzureWebApp@1
             displayName: 'Azure Web App Deploy website'
             inputs:
-              azureSubscription: 'satejmvcapp'
+              azureSubscription: 'Resource Manager - Space Web'
               appName: '$(WebAppName)'
               package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
