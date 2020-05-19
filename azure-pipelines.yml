@@ -83,9 +83,9 @@ stages:
       succeeded(),
       eq(variables['Build.SourceBranchName'],variables['releaseBranchName']) 
     )
-  jobs:
-  displayName: 'Deploy to Dev'
+  jobs:  
   - deployment: Deploy
+    displayName: 'Deploy to Dev'
     pool:
       vmImage: 'ubuntu-16.04'
     environment: dev
