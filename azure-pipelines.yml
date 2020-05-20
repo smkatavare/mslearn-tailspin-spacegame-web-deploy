@@ -167,6 +167,7 @@ stages:
   dependsOn: DBAVerificationApply
   jobs:
   - deployment: Deploy
+    displayName: 'Deploy to DEV'
     pool:
       vmImage: 'ubuntu-16.04'
     environment: dev
@@ -190,6 +191,7 @@ stages:
   dependsOn: Dev
   jobs:
   - deployment: Deploy
+    displayName: 'Deploy to TEST'
     pool:
       vmImage: 'ubuntu-16.04'
     environment: test
@@ -213,6 +215,7 @@ stages:
   dependsOn: Test
   jobs:
   - deployment: Deploy
+    displayName: 'Deploy to Staging'
     pool:
       vmImage: 'ubuntu-16.04'
     environment: staging
