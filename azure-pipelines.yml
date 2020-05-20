@@ -166,7 +166,7 @@ stages:
                   Update-VSTeamVariableGroup @methodParameters} 
 
 - stage: DBAVerificationApply
-  variables:
+  variables: 
     - group: 'Release'
   displayName: 'Apply database schema changes'
   dependsOn: DBAVerificationScript
@@ -220,6 +220,7 @@ stages:
                   Type = "Vsts"
                   Variables = $vars}
                 Update-VSTeamVariableGroup @methodParameters
+
 - stage: 'Dev'
   displayName: 'Deploy to the dev environment'
   dependsOn:
@@ -254,6 +255,7 @@ stages:
 - stage: 'Test'
   displayName: 'Deploy to the test environment'
   dependsOn: Dev
+  condition: succeeded('Dev')
   jobs:
   - deployment: Deploy
     pool:
@@ -277,6 +279,7 @@ stages:
 - stage: 'Staging'
   displayName: 'Deploy to the staging environment'
   dependsOn: Test
+  condition: succeeded('Test')
   jobs:
   - deployment: Deploy
     pool:
